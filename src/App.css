@@ -1,0 +1,190 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+body {
+  background-image: url("./img/footnotes-white.png"), url("./img/hiking2.jpg");
+  background-position: 100% 100%, top left;
+  background-repeat: no-repeat, no-repeat;
+  background-size: 10%, cover;
+  background-color: darkgray;
+  background-attachment: fixed, fixed;
+  /* //color: white; */
+}
+
+.users {
+  background-image: url("./img/footnotes-white.png"), url("./img/vista3.JPG");
+  background-position: 100% 100%, top left;
+  background-repeat: no-repeat, no-repeat;
+  background-size: 10%, cover;
+  background-color: darkgray;
+  background-attachment: fixed, fixed;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+span.dayNumber {
+  font-size: 2em;
+  font-weight: bold;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: rgb(5, 128, 251);
+}
+
+span.add-ski-day {
+  padding-left: 10px;
+}
+#main .pf-c-card {
+  opacity: 0.9;
+  background-color: rgba(255, 255, 255, 0.842);
+  color: black;
+  margin: 20px;
+  border: 6px solid lightgrey;
+}
+
+#main .pf-c-card__body {
+  font-size: 1em;
+}
+
+#main .pf-l-flex {
+  color: white;
+  margin-left: 20px;
+}
+
+#main .addButton {
+  color: white;
+  font-size: 1.5em;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#main .pf-l-gallery {
+  --pf-l-gallery--GridTemplateColumns: repeat(auto-fit, minmax(300px, 1fr));
+}
+@media (min-width: 1200px) {
+  #main .pf-l-gallery {
+    --pf-l-gallery--GridTemplateColumns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+}
+
+.slide-right {
+  position: relative;
+  float: right;
+  margin-top: -24px;
+  margin-right: -24px;
+}
+.slide-right-bottom {
+  position: relative;
+  float: right;
+  margin-bottom: 0px;
+  margin-right: 0px;
+}
+span.slide-right-bottom {
+  position: relative;
+  float: right;
+  margin-bottom: 0px;
+  margin-right: 0px;
+}
+
+.cal-flex-group {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 1200px) {
+  .cal-flex-group {
+    flex-direction: row;
+  }
+}
+.flex-display {
+  display: flex;
+}
+.no-flex-display {
+  display: block;
+}
+
+div.pf-c-form__group.white-text .pf-c-form__label-text {
+  color: white;
+}
+div.standard-view {
+  padding: 20px;
+}
+
+div.standard-view .pf-l-gallery {
+  --pf-l-gallery--GridTemplateColumns: repeat(auto-fit, minmax(350px, 1fr));
+}
+.add-padding-right {
+  padding-right: 15px;
+}
+.card-header_color {
+  color: black;
+}
+.indent {
+  padding-left: 15px;
+}
+.checkbox-padding-top {
+  padding-top: 20px;
+}
+.editicon-margin-top {
+  margin-top: 10px;
+}
