@@ -12,7 +12,7 @@ import {
 } from "@patternfly/react-core";
 // import { getStoredProp } from "./components/localStorage";
 import { AddLocationForm } from "./components/add-location";
-import { BuildTable } from "./components/build-table";
+import { BuildLocationsTable } from "./components/build-locations-table";
 
 export const Locations: React.FC<LocationsProps> = (props) => {
   const [items, setItems] = React.useState<LocationEntry[]>();
@@ -53,7 +53,7 @@ export const Locations: React.FC<LocationsProps> = (props) => {
             <CardBody>
               {" "}
               {items && items?.length !== 0 && (
-                <BuildTable
+                <BuildLocationsTable
                   key="table-for-activities"
                   items={items}
                   columnLabels={[

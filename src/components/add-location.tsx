@@ -53,21 +53,22 @@ export const AddLocationForm: React.FC<AddLocationFormProps> = (props) => {
       );
       return;
     }
-    const data = new FormData();
 
-    if (locationId) {
-      data.append("locationId", locationId.toString());
-    }
-    data.append("name", name);
-    data.append("description", description);
-    data.append("directions", directions);
-    data.append("status", status);
+    //build a data post
+    const opts = {
+      locationId,
+      name,
+      description,
+      directions,
+      status,
+    };
 
-    const url = `${process.env.REACT_APP_ACT_API_SERVER}/fnapi/?/location`;
+    const url = `${process.env.REACT_APP_API_SERVER}/fnapi/?/location`;
     const fetchMethod = "POST";
     fetch(url, {
       method: fetchMethod,
-      body: data,
+      // headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(opts),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -185,39 +186,3 @@ export type AddLocationFormProps = {
   statusMsg?: Function;
   edit?: boolean;
 };
-// const golfSchema = {
-//   title: "Golf Log",
-//   description: "Log for all my golfing",
-//   fields: {
-//     location: {
-//       type: "string",
-//       title: "Location",
-//       required: true,
-//     },
-//     date: {
-//       type: "date",
-//       title: "Date",
-//       required: true,
-//     },
-//     score: {
-//       type: "number",
-//       step: "1",
-//       title: "Score",
-//       required: true,
-//     },
-//     description: {
-//       type: "string",
-//       title: "Description",
-//     },
-//     cost: {
-//       type: "number",
-//       title: "Cost",
-//       step: "01",
-//     },
-//     who: {
-//       type: "string",
-//       title: "Who you played with",
-//     },
-//   },
-// };
-// console.log("Output:", JSON.stringify(golfSchema));

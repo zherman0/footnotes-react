@@ -8,7 +8,7 @@ import "@patternfly/react-core/dist/styles/base.css";
 import "./App.css";
 import { NavPage } from "./navigation";
 import { Locations } from "./locations";
-// import { Users } from "./users";
+import { Users } from "./users";
 // import { Hikes } from "./hikes";
 
 const App: React.FC = () => {
@@ -26,9 +26,6 @@ const App: React.FC = () => {
     </Router>
   );
 };
-function Users() {
-  return <h2>Users</h2>;
-}
 function Hikes() {
   return <h2>Hike</h2>;
 }
