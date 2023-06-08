@@ -21,7 +21,9 @@ export const LocationSelect: React.FC<LocationSelectProps> = (props) => {
         for (var i = 0; i < data.length; i++) {
           var obj: LocationEntry = data[i];
           dropdownItems.push(
-            <SelectOption key={obj.locationId} value={obj.locationId} />
+            <SelectOption key={obj.locationId} value={obj.locationId}>
+              {obj.name}
+            </SelectOption>
           );
         }
         setItems(dropdownItems);

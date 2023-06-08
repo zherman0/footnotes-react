@@ -38,7 +38,7 @@ export const Users: React.FC<UserProps> = (props) => {
 
   return (
     <div id="main">
-      {msg && <Alert title={msg} variant="info" timeout />}
+      {msg && <Alert title={msg} variant="info" timeout={1000} />}
       <Gallery>
         <GalleryItem key="locations-card">
           <Card>

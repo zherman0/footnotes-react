@@ -21,7 +21,9 @@ export const UserSelect: React.FC<UserSelectProps> = (props) => {
         for (var i = 0; i < data.length; i++) {
           var obj: UserEntry = data[i];
           dropdownItems.push(
-            <SelectOption key={obj.userId} value={obj.userId} />
+            <SelectOption key={obj.userId} value={obj.userId}>
+              {obj.username}
+            </SelectOption>
           );
         }
         setItems(dropdownItems);

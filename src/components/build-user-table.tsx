@@ -19,7 +19,7 @@ export const BuildUserTable: React.FC<BuildTableProps> = (props) => {
       <Thead>
         <Tr>
           {columnLabels.map((colLabel: string) => (
-            <Th>{colLabel}</Th>
+            <Th key={colLabel}>{colLabel}</Th>
           ))}
         </Tr>
       </Thead>
