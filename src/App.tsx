@@ -9,7 +9,7 @@ import "./App.css";
 import { NavPage } from "./navigation";
 import { Locations } from "./locations";
 import { Users } from "./users";
-// import { Hikes } from "./hikes";
+import { Hikes } from "./hikes";
 
 const App: React.FC = () => {
   return (
@@ -21,12 +21,9 @@ const App: React.FC = () => {
           <Route path="/hikes" element={<Hikes />} />
           <Route />
         </Routes>
-        <div></div>
+        <div className="homepage">HACk Week June 2023</div>
       </NavPage>
     </Router>
   );
 };
-function Hikes() {
-  return <h2>Hike</h2>;
-}
 export default App;

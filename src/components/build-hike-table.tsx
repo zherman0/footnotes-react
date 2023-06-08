@@ -8,14 +8,14 @@ import {
   Tbody,
   Td,
 } from "@patternfly/react-table";
-import { LocationEntry } from "../locations";
+import { HikeEntry } from "../hikes";
 
-export const BuildLocationsTable: React.FC<BuildTableProps> = (props) => {
+export const BuildHikesTable: React.FC<BuildTableProps> = (props) => {
   const { items = [], columnLabels = [] } = props;
 
   return (
     <TableComposable aria-label="Simple table">
-      <Caption>Locations where people have hiked</Caption>
+      <Caption>Hikes</Caption>
       <Thead>
         <Tr>
           {columnLabels.map((colLabel: string) => (
@@ -24,14 +24,13 @@ export const BuildLocationsTable: React.FC<BuildTableProps> = (props) => {
         </Tr>
       </Thead>
       <Tbody>
-        {items.map((item: any) => (
-          <Tr key={item?.locationId}>
-            <Td dataLabel={columnLabels[0]}>{item?.locationId}</Td>
-            <Td dataLabel={columnLabels[1]}>{item?.name}</Td>
+        {items.map((item: HikeEntry) => (
+          <Tr key={item?.hikeId}>
+            <Td dataLabel={columnLabels[0]}>{item?.hikeId}</Td>
+            <Td dataLabel={columnLabels[1]}>{item?.username}</Td>
+            <Td dataLabel={columnLabels[5]}>{item?.name}</Td>
             <Td dataLabel={columnLabels[2]}>{item?.description}</Td>
-            <Td dataLabel={columnLabels[3]}>{item?.directions}</Td>
-            <Td dataLabel={columnLabels[4]}>{item?.last_updated}</Td>
-            <Td dataLabel={columnLabels[5]}>{item?.status}</Td>
+            <Td dataLabel={columnLabels[4]}>{item?.hikeDate}</Td>
           </Tr>
         ))}
       </Tbody>
@@ -39,6 +38,6 @@ export const BuildLocationsTable: React.FC<BuildTableProps> = (props) => {
   );
 };
 export type BuildTableProps = {
-  items?: LocationEntry[];
+  items?: HikeEntry[];
   columnLabels?: string[];
 };

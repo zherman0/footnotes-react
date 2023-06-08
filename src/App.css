@@ -36,7 +36,13 @@
     transform: rotate(360deg);
   }
 }
-
+.homepage {
+  font-size: 3em;
+  color:white;
+  font-weight: bold;
+  padding-top:100px;
+  padding-left:100px;
+}
 body {
   background-image: url("./img/footnotes-white.png"), url("./img/hiking2.jpg");
   background-position: 100% 100%, top left;

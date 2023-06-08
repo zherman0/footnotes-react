@@ -50,14 +50,6 @@ export const AddUserForm: React.FC<AddLocationFormProps> = (props) => {
       return;
     }
 
-    //build a data post
-    // const opts = {
-    //   userId,
-    //   fullname,
-    //   username,
-    //   email,
-    //   status,
-    // };
     const data = new FormData();
     data.append("userId", userId ? userId.toString() : "");
     data.append("fullname", fullname);
@@ -68,16 +60,7 @@ export const AddUserForm: React.FC<AddLocationFormProps> = (props) => {
     const url = `${process.env.REACT_APP_API_SERVER}/fnapi/?/user`;
     const fetchMethod = "POST";
     fetch(url, {
-      //   headers: [
-      //     ["Content-Type", "application/json"],
-      //     ["Content-Type", "text/plain"],
-      //   ],
       method: fetchMethod,
-      //   headers: { "Content-Type": "multipart/form-data" },
-
-      //   headers: { "Content-Type": "application/json" },
-      //   headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      // headers: { "Content-Type": "text/plain" },
       body: data,
     })
       .then((res) => res.json())

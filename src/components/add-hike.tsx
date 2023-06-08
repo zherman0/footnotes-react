@@ -10,60 +10,64 @@ import {
   TextInput,
 } from "@patternfly/react-core";
 import { /*AddCircleOIcon,*/ EditIcon } from "@patternfly/react-icons";
-import { LocationEntry } from "../locations";
+import { HikeEntry } from "../hikes";
+import { UserSelect } from "./user-select";
+import { LocationSelect } from "./location-select";
 
-export const AddLocationForm: React.FC<AddLocationFormProps> = (props) => {
-  const [location, setLocation] = React.useState<LocationEntry>();
+export const AddHikeForm: React.FC<AddHikeFormProps> = (props) => {
+  const [hike, setHike] = React.useState<HikeEntry>();
 
   const [msg, setMsg] = React.useState("");
-  const [name, setName] = React.useState("");
+  const [name, setName] = React.useState<number>();
+  const [location, setLocation] = React.useState<number>();
   const [description, setDescription] = React.useState("");
-  const [directions, setDirections] = React.useState("");
-  const [status, setStatus] = React.useState("");
+  const [hikeDate, setHikeDate] = React.useState("");
   const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const { locationId, edit = false, statusMsg, item = null } = props;
+  const { hikeId, edit = false, statusMsg, item = null } = props;
 
   React.useEffect(() => {
-    if (!item && locationId) {
-      fetch(
-        `${process.env.REACT_APP_API_SERVER}/fnapi/?/location/${locationId}`
-      )
+    if (!item && hikeId) {
+      fetch(`${process.env.REACT_APP_API_SERVER}/fnapi/?/hike/${hikeId}`)
         .then((res) => res.json())
         .then((data) => {
           setLocation(data);
         })
         .catch(console.log);
     } else if (item) {
-      setLocation(item);
+      setHike(item);
     }
-  }, [locationId, item]);
+  }, [hikeId, item]);
 
   const clearForm = () => {};
 
-  const handleName = (v: string, e: any) => setName(v);
+  const handleName = (v: string, e: any) => setName(parseInt(v));
+  const handleLocation = (v: string, e: any) => setLocation(parseInt(v));
   const handleDescription = (v: string, e: any) => setDescription(v);
-  const handleDirections = (v: string, e: any) => setDirections(v);
-  const handleStatus = (v: string, e: any) => setStatus(v);
+  const handleDate = (v: string, e: any) => setHikeDate(v);
   const handleSubmit = (e: any) => {
     e.preventDefault();
     //Quick Validation:
-    if (name === "" || description === "" || directions === "") {
+    if (!name || description === "" || !location) {
       setMsg(
-        "You need to set all required fields[name, description, directions]"
+        "You need to set all required fields[name, description, location]"
       );
       return;
     }
 
     //build a data post
-
+    // const opts = {
+    //   name,
+    //   location,
+    //   description,
+    //   hikeDate,
+    // };
     const data = new FormData();
-    data.append("locationId", locationId ? locationId.toString() : "");
-    data.append("name", name);
+    data.append("locationId", location.toString());
+    data.append("userId", name.toString());
+    data.append("hikeDate", hikeDate);
     data.append("description", description);
-    data.append("directions", directions);
-    data.append("status", status);
 
-    const url = `${process.env.REACT_APP_API_SERVER}/fnapi/?/location`;
+    const url = `${process.env.REACT_APP_API_SERVER}/fnapi/?/hike`;
     const fetchMethod = "POST";
     fetch(url, {
       method: fetchMethod,
@@ -91,18 +95,18 @@ export const AddLocationForm: React.FC<AddLocationFormProps> = (props) => {
           variant="primary"
           onClick={handleModalToggle}
         >
-          Add Place
+          Add Hike
         </Button>
       )}
       {edit && (
         <EditIcon
           onClick={handleModalToggle}
-          key={`edit-schema-${locationId}`}
+          key={`edit-schema-${hikeId}`}
         ></EditIcon>
       )}
       <Modal
         variant={ModalVariant.small}
-        title={locationId ? "Edit Location" : "Add Location"}
+        title={hikeId ? "Edit Location" : "Add Hike"}
         isOpen={isModalOpen}
         onClose={handleModalToggle}
         actions={[
@@ -126,21 +130,19 @@ export const AddLocationForm: React.FC<AddLocationFormProps> = (props) => {
           />
         )}
         <Form onSubmit={handleSubmit}>
+          <FormGroup label="Name" isRequired fieldId="name-field">
+            <UserSelect userValue={name} onChange={handleName} />
+          </FormGroup>
           <FormGroup label="Location" isRequired fieldId="name-field">
-            <TextInput
-              value={location?.name}
-              isRequired
-              type="text"
-              id="name-field"
-              aria-describedby="name-field"
-              name="name-field"
-              onChange={handleName}
+            <LocationSelect
+              locationValue={location}
+              onChange={handleLocation}
             />
           </FormGroup>
           <FormGroup label="Description" isRequired fieldId="desc-field">
             <div className="flex-display">
               <TextInput
-                value={location?.description}
+                value={hike?.description}
                 isRequired
                 type="text"
                 id="desc-field"
@@ -150,28 +152,16 @@ export const AddLocationForm: React.FC<AddLocationFormProps> = (props) => {
               />
             </div>
           </FormGroup>
-          <FormGroup label="Directions" isRequired fieldId="directions-field">
-            <div className="flex-display">
-              <TextInput
-                value={directions}
-                isRequired
-                type="text"
-                id="directions-field"
-                aria-describedby="directions-field"
-                name="directions-field"
-                onChange={handleDirections}
-              />
-            </div>
-          </FormGroup>
-          <FormGroup label="Status" isRequired fieldId="status-field">
+
+          <FormGroup label="HikeDate" isRequired fieldId="status-field">
             <TextInput
-              value={status}
+              value={hike?.hikeDate}
               isRequired
-              type="text"
+              type="date"
               id="status-field"
               aria-describedby="status-field"
               name="status-field"
-              onChange={handleStatus}
+              onChange={handleDate}
             />
           </FormGroup>
         </Form>
@@ -179,9 +169,9 @@ export const AddLocationForm: React.FC<AddLocationFormProps> = (props) => {
     </div>
   );
 };
-export type AddLocationFormProps = {
-  item?: LocationEntry;
-  locationId?: number;
+export type AddHikeFormProps = {
+  item?: HikeEntry;
+  hikeId?: number;
   statusMsg?: Function;
   edit?: boolean;
 };
