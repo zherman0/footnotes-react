@@ -1,0 +1,93 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: footnotes-data
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: slow
+  nfs:
+    path: /tmp
+    server: 172.17.0.2
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: footnotes-pvc-1
+  namespace: test1
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  resources:
+    requests:
+      storage: 1Gi
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: footnotes-db
+  labels:
+    app: footnotes-db
+  namespace: test1
+spec:
+  securityContext:
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+  volumes:
+    - name: footnotes-data
+      persistentVolumeClaim:
+        claimName: footnotes-pvc-1
+  containers:
+    - name: fn-db
+      volumeMounts:
+        - name: footnotes-data
+          mountPath: /var/lib/mysql
+      image: quay.io/zherman/footnotes-db
+      ports:
+        - containerPort: 3306
+      securityContext:
+        allowPrivilegeEscalation: false
+        capabilities:
+          drop:
+            - ALL
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: footnotes-api
+  labels:
+    app: footnotes-api
+  namespace: test1
+spec:
+  serviceAccountName: default
+  containers:
+    - name: footnotes-api
+      image: quay.io/zherman/footnotes-api
+      ports:
+        - containerPort: 8080
+      env:
+        - name: DB_SERVICE_URL
+          value: http://footnotes-db-service:3306
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: footnotes-app
+  labels:
+    app: footnotes-app
+  namespace: test1
+spec:
+  serviceAccountName: default
+  containers:
+    - name: footnotes-app
+      image: quay.io/zherman/footnotes-app
+      ports:
+        - containerPort: 3000
+      env:
+        - name: API_SERVICE
+          value: footnotes-api-service

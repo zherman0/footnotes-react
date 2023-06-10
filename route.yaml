@@ -1,0 +1,32 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: footnotes-db-route
+spec:
+  to:
+    kind: Service
+    name: footnotes-db-service
+  port:
+    targetPort: 3306
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: footnotes-api-route
+spec:
+  to:
+    kind: Service
+    name: footnotes-api-service
+  port:
+    targetPort: 80
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: footnotes-app-route
+spec:
+  to:
+    kind: Service
+    name: footnotes-app-service
+  port:
+    targetPort: 3000

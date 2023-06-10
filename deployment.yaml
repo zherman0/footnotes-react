@@ -1,0 +1,34 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  name: footnotes-deployment
+spec:
+  replicas: 1
+  selector:
+    app: footnotes
+  template:
+    metadata:
+      labels:
+        app: footnotes
+    volumes:
+      - name: footnotes-data
+        persistentVolumeClaim:
+          claimName: footnotes-pvc-1
+    spec:
+      serviceAccountName: default
+      containers:
+        - name: footnotes-app
+          image: quay.io/zherman/footnotes-app
+          ports:
+            - containerPort: 3000
+        - name: footnotes-api
+          image: quay.io/zherman/footnotes-api
+          ports:
+            - containerPort: 80
+        - name: footnotes-db
+          volumeMounts:
+            - name: footnotes-data
+              mountPath: /var/lib/mysql
+          image: quay.io/zherman/footnotes-db
+          ports:
+            - containerPort: 3006
