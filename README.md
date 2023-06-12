@@ -79,6 +79,13 @@ Your app is ready to be deployed!
    ```
 1. The deploy script assumes you are working in a project call `test`. Either update all the `namespace:` fields in the deply file, or simply setup a project called `test1`<br/>
    `oc new-project test1`
+1. The deploy script also needs `<URL>` placeholder replaced for the `value` field in the env variable `REACT_APP_API_SERVER`. The easiest way to get this is to just look at the url for your cluster and copy everything after the `console-openshift-console.apps`<br/>
+   ```
+   if your url is: https://console-openshift-console.apps.2ae47fbf5aa339f6151d.aws-4.ci.openshift.org
+   env:
+        - name: REACT_APP_API_SERVER
+          value: http://footnotes-api-route-test1.apps.2ae47fbf5aa339f6151d.aws-4.ci.openshift.org
+   ```
 1. Run the deploy file using either the CLI or the web console yaml import tool<br/>
    `oc apply -f deploy_footnotes.yaml`
 1. This script will create the pods (containers), services, and route require to run the application. Please monitor the pod creation and make sure they are all running before continuing.
