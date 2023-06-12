@@ -18,17 +18,17 @@ spec:
       serviceAccountName: default
       containers:
         - name: footnotes-app
-          image: quay.io/zherman/footnotes-app
+          image: quay.io/<username>/footnotes-app
           ports:
             - containerPort: 3000
         - name: footnotes-api
-          image: quay.io/zherman/footnotes-api
+          image: quay.io/<username>/footnotes-api
           ports:
             - containerPort: 80
         - name: footnotes-db
           volumeMounts:
             - name: footnotes-data
               mountPath: /var/lib/mysql
-          image: quay.io/zherman/footnotes-db
+          image: quay.io/<username>/footnotes-db
           ports:
             - containerPort: 3006
