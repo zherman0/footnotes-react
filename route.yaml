@@ -1,3 +1,4 @@
+# Not needed for production, only for testing
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
@@ -9,6 +10,7 @@ spec:
   port:
     targetPort: 3306
 ---
+# Not needed for production, only for testing
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
