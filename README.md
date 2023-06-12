@@ -77,9 +77,9 @@ Your app is ready to be deployed!
       - name: fn-db
         image: quay.io/<username>/footnotes-db
    ```
-1. The deploy script assumes you are working in a project call `test`. Either update all the `namespace:` fields in the deply file, or simply setup a project called `test1`<br/>
+1. The deploy script assumes you are working in a project called `test1`. Either update all the `namespace:` fields in the deploy file, or simply setup a project called `test1`<br/>
    `oc new-project test1`
-1. The deploy script also needs `<URL>` placeholder replaced for the `value` field in the env variable `REACT_APP_API_SERVER`. The easiest way to get this is to just look at the url for your cluster and copy everything after the `console-openshift-console.apps`<br/>
+1. The deploy script also needs the `<URL>` placeholder replaced for the `value` field in the env variable `REACT_APP_API_SERVER`. The easiest way to get this is to just look at the url for your cluster and copy everything after the `console-openshift-console.apps`<br/>
    ```
    if your url is: https://console-openshift-console.apps.2ae47fbf5aa339f6151d.aws-4.ci.openshift.org
    env:
