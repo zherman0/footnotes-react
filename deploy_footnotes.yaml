@@ -75,24 +75,6 @@ spec:
           value: footnotes-db-service
 ---
 apiVersion: v1
-kind: Pod
-metadata:
-  name: footnotes-app
-  labels:
-    app: footnotes-app
-  namespace: test1
-spec:
-  serviceAccountName: default
-  containers:
-    - name: footnotes-app
-      image: quay.io/<username>/footnotes-app
-      ports:
-        - containerPort: 3000
-      env:
-        - name: API_SERVICE
-          value: footnotes-api-service
----
-apiVersion: v1
 kind: Service
 metadata:
   name: footnotes-db-service
@@ -117,6 +99,36 @@ spec:
     - protocol: TCP
       port: 80
       targetPort: 80
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: footnotes-api-route
+spec:
+  to:
+    kind: Service
+    name: footnotes-api-service
+  port:
+    targetPort: 80
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: footnotes-app
+  labels:
+    app: footnotes-app
+  namespace: test1
+spec:
+  serviceAccountName: default
+  containers:
+    - name: footnotes-app
+      image: quay.io/<username>/footnotes-app
+      ports:
+        - containerPort: 3000
+      env:
+        - name: REACT_APP_API_SERVER
+          #oc get route footnotes-api-route --template='{{.spec.host}}{{"\n"}}'
+          value: http://footnotes-api-route-test1.apps.<URL>
 ---
 apiVersion: v1
 kind: Service
