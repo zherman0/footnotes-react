@@ -10,12 +10,12 @@
 
 1. Copy repo to local directory <br/>
    `git clone https://github.com/zherman0/footnotes-react.git`
-2. While the UI will start, there will be no data unless you install the API as well [footnoes api](zherman0/footnotes-api).
+2. While the UI will start, there will be no data unless you install the API as well [footnotes-api](https://github.com/zherman0/footnotes-api).
 3. After installing the API server and database server, run <br/>
    `npm install`<br/>
 4. You should only need to update the '.env\*' file to point to your correct host (this should not need to change):
    > REACT_APP_API_SERVER=localhost
-5. Start the app
+5. Start the app<br/>
    `npm start`
 
 ## Install Scripts
@@ -39,7 +39,7 @@ Your app is ready to be deployed!
 
 # Containers
 
-1. After completing the instructions for [footnotes api containers](zherman0/footnotes-api#container)
+1. After completing the instructions for [footnotes api containers](https://github.com/zherman0/footnotes-api/tree/main#containers)
 1. Copy repo to local directory <br/>
    `git clone https://github.com/zherman0/footnotes-react.git`
 1. Build app docker file (make sure you are back in the footnote-react project)<br/>
@@ -50,7 +50,7 @@ Your app is ready to be deployed!
 
 # Openshift
 
-1. After completing the instructions for [footnotes api openshift](zherman0/footnotes-api#openshift)
+1. After completing the instructions for [footnotes-api openshift](https://github.com/zherman0/footnotes-api/tree/main#openshift)
 1. Copy repo to local directory <br/>
    `git clone https://github.com/zherman0/footnotes-react.git`
 1. Build app docker file (make sure you are back in the footnote-react project)<br/>
